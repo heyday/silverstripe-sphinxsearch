@@ -1,4 +1,4 @@
-silverstripe-sphinx
+silverstripe-sphinxsearch
 ===================
 
 Silverstripe/Sphinx integration
