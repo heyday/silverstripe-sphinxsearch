@@ -20,9 +20,9 @@ class Sphinx
 	 */
 	protected static $sphinx_indexer_mem_limit = '128M';
 	protected static $sphinx_binary_location = '';
-	protected static $sphinx_config_folder = '../heyday-sphinx/configs';
-	protected static $sphinx_index_folder = '../heyday-sphinx/indexes';
-	protected static $sphinx_searchd_log_folder = '../heyday-sphinx/logs';
+	protected static $sphinx_config_folder = '../silverstripe-sphinxsearch/configs';
+	protected static $sphinx_index_folder = '../silverstripe-sphinxsearch/indexes';
+	protected static $sphinx_searchd_log_folder = '../silverstripe-sphinxsearch/logs';
 	protected static $sphinx_port = 3313;
 	protected static $sphinx_host = '127.0.0.1';
     protected static $sphinx_indexes = array();
