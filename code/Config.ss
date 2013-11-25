@@ -1,5 +1,5 @@
-<% if Indexes %>
-    <% control Indexes %>
+<% if $Indexes %>
+    <% loop Indexes %>
 
 source $Index
 {
@@ -10,10 +10,10 @@ source $Index
     sql_db = $database
     sql_port = $port
     sql_query  = $Query;
-    <% if Attributes %>
-        <% control Attributes %>
+    <% if $Attributes %>
+        <% loop $Attributes %>
     sql_attr_$Type = $Attribute
-        <% end_control %>
+        <% end_loop %>
     <% end_if %>
 }
 
@@ -29,7 +29,7 @@ index $Index
     stopwords = $ConfigFolder/stopwords.txt
 }
 
-    <% end_control %>
+    <% end_loop %>
 <% end_if %>
 
 indexer
