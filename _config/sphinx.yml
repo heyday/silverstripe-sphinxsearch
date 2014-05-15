@@ -1,0 +1,24 @@
+---
+Name: sphinx
+---
+Director:
+  rules:
+    'sphinx//$Action/$ID': 'SphinxController'
+
+SphinxController:
+  allowed_actions:
+    - indexer
+    - searchd
+    - search
+
+Sphinx:
+  db:
+    port: 3306
+  sphinx_indexer_mem_limit: 128M
+  sphinx_binary_location: ''
+  sphinx_config_folder: '../silverstripe-sphinxsearch/configs'
+  sphinx_index_folder: '../silverstripe-sphinxsearch/indexes'
+  sphinx_searchd_log_folder: '../silverstripe-sphinxsearch/logs'
+  sphinx_port: 3313
+  sphinx_host: '127.0.0.1'
+  sphinx_indexes: []
