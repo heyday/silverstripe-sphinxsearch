@@ -1,36 +1,30 @@
-<% if $Indexes %>
-    <% loop Indexes %>
-
+<% if $Indexes %><% loop $Indexes %>
 source $Index
 {
-    type = mysql
-    sql_host = $server
-    sql_user = $username
-    sql_pass = $password
-    sql_db = $database
-    sql_port = $port
-    sql_query  = $Query;
-    <% if $Attributes %>
-        <% loop $Attributes %>
-    sql_attr_$Type = $Attribute
-        <% end_loop %>
-    <% end_if %>
+	type = mysql
+	sql_host = $DB.server
+	sql_user = $DB.username
+	sql_pass = $DB.password
+	sql_db = $DB.database
+	sql_port = $DB.port
+	sql_query  = $Query;
+	<% if $Attributes %><% loop $Attributes %>
+	sql_attr_{$Type} = $Attribute
+	<% end_loop %><% end_if %>
 }
 
 index $Index
 {
-    source = $Index
-    path = $IndexPath
-    morphology = $Morphology
-    enable_star = 1
-    min_word_len = 1
-    min_prefix_len = 3
-    charset_type = utf-8
-    stopwords = $ConfigFolder/stopwords.txt
+	source = $Index
+	path = $IndexPath
+	morphology = $Morphology
+	enable_star = 1
+	min_word_len = 1
+	min_prefix_len = 3
+	charset_type = utf-8
+	stopwords = {$ConfigFolder}/stopwords.txt
 }
-
-    <% end_loop %>
-<% end_if %>
+<% end_loop %><% end_if %>
 
 indexer
 {
