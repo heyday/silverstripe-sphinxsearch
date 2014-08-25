@@ -122,7 +122,11 @@ class SphinxIndexConfiguration
      */
     public function getQueryString()
     {
-        return $this->query instanceof QueryBuilder ? $this->query->getQuery()->sql() : $this->query;
+        return preg_replace(
+            '/\s+/',
+            ' ',
+            $this->query instanceof QueryBuilder ? $this->query->getQuery()->sql() : $this->query
+        );
     }
     
     /**
