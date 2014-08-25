@@ -64,7 +64,7 @@ class Sphinx
      * @param string $indexFolder
      */
     public function __construct(
-        array $indexes,
+        $indexes,
         $host,
         $port,
         $defaultDbConfig,
@@ -93,22 +93,22 @@ class Sphinx
     }
 
     /**
-     * @param array|mixed $indexes
+     * @param \Traversable|array|mixed $indexes
      */
     protected function assertValidIndexes($indexes)
     {
-        if (!is_array($indexes)) {
-            throw new \RuntimeException("Indexes must be an array");
+        if (!is_array($indexes) && !$indexes instanceof \Traversable) {
+            throw new \RuntimeException("Indexes must be an array or traversable");
         }
-
-        array_map(function ($index) {
+        
+        foreach ($indexes as $index) {
             if (!$index instanceof SphinxIndexConfiguration) {
                 throw new \RuntimeException(sprintf(
                     "Allow indexes must be instances of SphinxIndexConfiguration, '%s' given",
                     gettype($index)
                 ));
             }
-        }, $indexes);
+        }
     }
 
     /**
@@ -142,7 +142,7 @@ class Sphinx
     /**
      * @param \Heyday\SphinxSearch\SphinxIndexConfiguration[] $indexes
      */
-    public function setIndexes(array $indexes)
+    public function setIndexes($indexes)
     {
         $this->assertValidIndexes($indexes);
         foreach ($indexes as $index) {
@@ -162,7 +162,7 @@ class Sphinx
      * @param string $identifier
      * @return bool|SphinxIndexConfiguration
      */
-    protected function getIndex($identifier)
+    public function getIndex($identifier)
     {
         return isset($this->indexes[$identifier]) ? $this->indexes[$identifier] : false;
     }
@@ -515,8 +515,8 @@ class Sphinx
             $this->port
         );
 
-        $sphinxClient->SetMatchMode(SPH_MATCH_ANY);
-        $sphinxClient->SetSortMode(SPH_SORT_RELEVANCE);
+        $sphinxClient->SetMatchMode(SphinxClient::SPH_MATCH_ANY);
+        $sphinxClient->SetSortMode(SphinxClient::SPH_SORT_RELEVANCE);
 
         return $sphinxClient;
     }

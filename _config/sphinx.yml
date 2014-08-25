@@ -12,13 +12,7 @@ SphinxController:
     - search
 
 Injector:
-  Heyday\SphinxSearch\Sphinx:
-    class: Heyday\SphinxSearch\Sphinx
-    constructor:
-      1: '127.0.0.1'
-      2: 3313
-
   SphinxController:
     class: SphinxController
     constructor:
-      0: %$Heyday\SphinxSearch\Sphinx
+      0: %$Heyday\SphinxSearch\Sphinx #Provided externally
