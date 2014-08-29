@@ -43,4 +43,5 @@ searchd
 	seamless_rotate = 1
 	preopen_indexes = 1
 	unlink_old = 1
+	compat_sphinxql_magics = 0
 }
