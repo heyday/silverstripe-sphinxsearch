@@ -234,7 +234,7 @@ class Sphinx
     {
         return sprintf(
             "%s/%s",
-            $this->binaryLocation,
+            rtrim($this->binaryLocation, '/'),
             $binary
         );
     }
