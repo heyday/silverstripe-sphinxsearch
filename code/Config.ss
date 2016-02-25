@@ -18,10 +18,8 @@ index $Index
 	source = $Index
 	path = $IndexPath
 	morphology = $Morphology
-	enable_star = 1
 	min_word_len = 1
 	min_prefix_len = 3
-	charset_type = utf-8
 	stopwords = {$ConfigFolder}/stopwords.txt
 }
 <% end_loop %><% end_if %>
@@ -39,9 +37,7 @@ searchd
 	read_timeout = 5
 	max_children = 30
 	pid_file = {$LogFolder}/searchd.pid
-	max_matches = 1000
 	seamless_rotate = 1
 	preopen_indexes = 1
 	unlink_old = 1
-	compat_sphinxql_magics = 0
 }

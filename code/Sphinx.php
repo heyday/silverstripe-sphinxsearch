@@ -4,10 +4,8 @@ namespace Heyday\SphinxSearch;
 
 use Sphinx\SphinxClient;
 
-class Sphinx
+class Sphinx extends DbValidate
 {
-    use DbValidateTrait;
-
     /**
      * @var string
      */

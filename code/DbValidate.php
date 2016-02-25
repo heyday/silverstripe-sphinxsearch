@@ -3,15 +3,16 @@
 namespace Heyday\SphinxSearch;
 
 /**
+ * Class DbValidate
  * @package Heyday\SphinxSearch
  */
-trait DbValidateTrait
+class DbValidate
 {
     /**
      * @param array|\ArrayObject $dbConfig
      * @throws \RuntimeException
      */
-    protected function assertValidDbConfig($dbConfig)
+    public function assertValidDbConfig($dbConfig)
     {
         $requiredKeys = [
             'server',

@@ -7,10 +7,8 @@ use Heyday\QueryBuilder\QueryBuilder;
 /**
  * @package Heyday
  */
-class SphinxIndexConfiguration
+class SphinxIndexConfiguration extends DbValidate
 {
-    use DbValidateTrait;
-
     /**
      * @var string
      */
