@@ -9,9 +9,6 @@
 		"heyday/silverstripe-querybuilder": "1.3.*",
 		"gigablah/sphinxphp": "~2.0.8"
 	},
-	"autoload": {
-		"files": ["code/DbValidateTrait.php"]
-	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "2.0.x-dev"
