@@ -2,41 +2,32 @@
 
 class SphinxController extends Controller
 {
+    private static $allowed_actions = ['searchd', 'indexer', 'checksphinx', 'search'];
 
     protected $sphinx = false;
 
     public function getSphinx()
     {
-
         if (!$this->sphinx instanceof Sphinx) {
-
             $this->sphinx = new Sphinx();
-
         }
 
         return $this->sphinx;
-
     }
 
     public function init()
     {
-
         if (!Director::is_cli() && !Permission::check('ADMIN')) {
-
             echo 'Not allowed';
             exit;
-
         }
 
         parent::init();
-
     }
 
     public function index()
     {
-
         if (Director::is_cli()) {
-
             echo implode(PHP_EOL, array(
                     'Commands available:',
                     'sake sphinx/indexer (indexes mysql db)',
@@ -49,17 +40,13 @@ class SphinxController extends Controller
                 )), PHP_EOL;
 
             exit;
-
         } else {
-
             $sphinx = $this->getSphinx();
 
             return array(
                 'Searchd' => $sphinx->running()
             );
-
         }
-
     }
 
     public function indexer()
@@ -79,94 +66,68 @@ class SphinxController extends Controller
         $sphinx = $this->getSphinx();
 
         if ($sphinx->index($options)) {
-
             echo 'Success', PHP_EOL;
             exit;
-
         }
 
         echo 'Failed', PHP_EOL;
         exit;
-
     }
 
     public function searchd()
     {
-
         $request = $this->getRequest();
 
         if ($request->param('ID') && in_array($request->param('ID'), array('start', 'stop', 'running', 'allrunning'))) {
-
             $sphinx = $this->getSphinx();
 
-//			if ($sphinx->connect()) {
+            //			if ($sphinx->connect()) {
 
             if ($request->param('ID') == 'running') {
-
                 if ($pid = $sphinx->{$request->param('ID')}()) {
-
                     echo 'Running: ', $pid, PHP_EOL;
                     exit;
-
                 } else {
-
                     echo 'Not running', PHP_EOL;
                     exit;
-
                 }
-
-            } else if ($request->param('ID') == 'allrunning') {
-
+            } elseif ($request->param('ID') == 'allrunning') {
                 echo $sphinx->{$request->param('ID')}(), PHP_EOL;
 
                 exit;
-
-            } else if ($request->param('ID') == 'stop' && $sphinx->{$request->param('ID')}($request->param('OtherID') == 'force' ? true : false)) {
-
+            } elseif ($request->param('ID') == 'stop' && $sphinx->{$request->param('ID')}($request->param('OtherID') == 'force' ? true : false)) {
                 echo 'Success', PHP_EOL;
                 exit;
-
-            } elseif($sphinx->{$request->param('ID')}()) {
-
+            } elseif ($sphinx->{$request->param('ID')}()) {
                 echo 'Success', PHP_EOL;
                 exit;
-
             }
 
-//			}
-
+            //			}
         }
 
         echo 'Failed', PHP_EOL;
         exit;
-
     }
 
     public function search()
     {
-
         $request = $this->getRequest();
 
         if ($request->getVar('search')) {
-
             $sphinx = $this->getSphinx();
 
             if ($sphinx->connect()) {
-
                 $index = $request->getVar('index');
 
                 $sphinx->search($request->getVar('search'), isset($index) ? $index : null);
 
                 echo 'Success', PHP_EOL;
                 exit;
-
             }
-
         }
 
         echo 'Failed', PHP_EOL;
         exit;
-
     }
-
 }
