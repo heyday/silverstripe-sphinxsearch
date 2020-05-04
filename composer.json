@@ -2,6 +2,6 @@
     "name": "heyday/silverstripe-sphinxsearch",
     "type": "silverstripe-module",
     "require": {
-        "composer/installers": "1.0.0"
+        "composer/installers": "~1.0"
     }
 }
