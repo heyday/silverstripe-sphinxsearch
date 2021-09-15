@@ -1,6 +1,6 @@
 <?php
 
-class Sphinx extends Object
+class Sphinx extends SS_Object
 {
 
     protected $indexes = array ();
